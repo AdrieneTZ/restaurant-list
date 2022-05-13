@@ -21,12 +21,22 @@ app.get('/', (req,res) => {
   res.render('index', {restaurantsData: restaurantsData.results})
 })
 
-// 個別餐廳介紹頁面
+// feature: 個別餐廳介紹頁面
 app.get('/restaurants/:restaurant_id', (req, res) => {
   const restaurant = restaurantsData.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
   res.render('show', {restaurantData: restaurant})
 })
 
+// feature: search with keyword
+app.get('/search', (req, res) => {
+  const keyword = req.query.keyword
+  const restaurants = restaurantsData.results.filter(restaurant => {
+    const name = restaurant.name.toLowerCase()
+    const category = restaurant.category.toLowerCase()
+    return name.includes(keyword.toLowerCase()) || category.includes(keyword.toLowerCase())
+  })
+  res.render('index', {restaurantsData: restaurants, keyword: keyword})
+})
 // 啟動 server
 app.listen(port, () => {
   console.log(`Express is running on http://localhost:${port}`)
