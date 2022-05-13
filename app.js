@@ -30,12 +30,16 @@ app.get('/restaurants/:restaurant_id', (req, res) => {
 // feature: search with keyword
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
-  const restaurants = restaurantsData.results.filter(restaurant => {
-    const name = restaurant.name.toLowerCase()
-    const category = restaurant.category.toLowerCase()
-    return name.includes(keyword.toLowerCase()) || category.includes(keyword.toLowerCase())
-  })
-  res.render('index', {restaurantsData: restaurants, keyword: keyword})
+  if (!keyword.trim().length) {
+    res.render('index', {restaurantsData: restaurantsData.results})
+  } else {
+    const restaurants = restaurantsData.results.filter(restaurant => {
+      const name = restaurant.name.toLowerCase()
+      const category = restaurant.category.toLowerCase()
+      return name.includes(keyword.toLowerCase()) || category.includes(keyword.toLowerCase())
+    })
+    res.render('index', {restaurantsData: restaurants, keyword: keyword})
+  }
 })
 // 啟動 server
 app.listen(port, () => {
