@@ -24,5 +24,4 @@ npm run dev
 ```
 
 ### Demo
-![demo.gif](https://drive.google.com/uc?id=1yFhftJeK5z2EF6LysyR7krR4R53m3Na2)
-
+![demo.gif](https://drive.google.com/uc?id=1YKjBYGIF7oZorw6JZj8ASVRsESbdkvwU)
